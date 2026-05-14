@@ -4,10 +4,9 @@
   <title>YEWKIE'S Virtual Gallery</title>
 
   <style>
-
     body {
       margin: 0;
-      background: black;
+      background: #050505;
       color: white;
       font-family: monospace;
       overflow-x: hidden;
@@ -16,83 +15,69 @@
     .noise {
       position: fixed;
       inset: 0;
-      background: repeating-radial-gradient(circle,
-      rgba(255,255,255,0.08) 1px,
-      transparent 2px);
-      opacity: 0.08;
+      background: repeating-radial-gradient(circle, rgba(255,255,255,0.08) 1px, transparent 2px);
+      opacity: 0.06;
       pointer-events: none;
       animation: static 0.2s infinite;
+      z-index: 10;
     }
 
     @keyframes static {
-      0% {
-        transform: translate(0,0);
-      }
-
-      50% {
-        transform: translate(-10px,5px);
-      }
-
-      100% {
-        transform: translate(5px,-10px);
-      }
+      0% { transform: translate(0,0); }
+      50% { transform: translate(-8px,5px); }
+      100% { transform: translate(5px,-8px); }
     }
 
     .hero {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       background:
-      radial-gradient(circle,
-      #1a1a1a,
-      #000);
+        radial-gradient(circle at center, rgba(80,80,80,0.2), transparent 40%),
+        linear-gradient(to bottom, #080808, #000);
+      position: relative;
       padding: 20px;
+    }
+
+    .hero-box {
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 50px 35px;
+      max-width: 700px;
+      background: rgba(255,255,255,0.03);
+      box-shadow: 0 0 40px rgba(255,255,255,0.05);
     }
 
     h1 {
       font-size: 55px;
       letter-spacing: 8px;
-      animation: flicker 2s infinite;
       margin: 0;
-    }
-
-    .subtitle {
-      color: #888;
-      margin-top: 15px;
-      font-size: 15px;
-      letter-spacing: 3px;
+      animation: flicker 2s infinite;
     }
 
     @keyframes flicker {
+      0%,100% { opacity: 1; }
+      45% { opacity: 0.5; }
+      50% { opacity: 0.1; }
+      55% { opacity: 0.9; }
+    }
 
-      0%,100% {
-        opacity: 1;
-      }
-
-      45% {
-        opacity: 0.4;
-      }
-
-      50% {
-        opacity: 0.1;
-      }
-
-      55% {
-        opacity: 0.8;
-      }
+    .subtitle {
+      color: #999;
+      margin-top: 20px;
+      letter-spacing: 3px;
     }
 
     .enter {
-      margin-top: 40px;
+      display: inline-block;
+      margin-top: 35px;
       padding: 15px 35px;
       border: 1px solid white;
       color: white;
       text-decoration: none;
-      transition: 0.3s;
       letter-spacing: 3px;
+      transition: 0.3s;
     }
 
     .enter:hover {
@@ -101,64 +86,94 @@
       filter: blur(1px);
     }
 
-    .gallery {
-      padding: 60px;
-      display: grid;
-      grid-template-columns:
-      repeat(auto-fit,minmax(230px,1fr));
-      gap: 30px;
+    .floating-text {
+      position: absolute;
+      color: rgba(255,255,255,0.18);
+      font-size: 13px;
+      letter-spacing: 2px;
     }
 
-    .art {
+    .one { top: 20%; left: 10%; }
+    .two { bottom: 25%; right: 12%; }
+    .three { top: 70%; left: 20%; }
+
+    .archive {
+      padding: 80px 8%;
+      background: #030303;
+    }
+
+    .section-title {
+      font-size: 25px;
+      letter-spacing: 4px;
+      margin-bottom: 40px;
+      color: #ccc;
+    }
+
+    .file {
+      display: flex;
+      align-items: center;
+      gap: 35px;
+      margin-bottom: 80px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      padding-top: 40px;
+    }
+
+    .file:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .file img {
+      width: 45%;
+      max-height: 420px;
+      object-fit: cover;
+      filter: grayscale(40%) contrast(120%);
       border: 1px solid rgba(255,255,255,0.2);
-      padding: 10px;
-      background: rgba(255,255,255,0.03);
-      transition: 0.3s;
-      backdrop-filter: blur(2px);
     }
 
-    .art:hover {
-      transform:
-      scale(1.05)
-      rotate(-1deg);
-
-      filter:
-      contrast(130%)
-      blur(0.5px);
+    .file-text {
+      width: 50%;
     }
 
-    .art img {
-      width: 100%;
-      display: block;
+    .file-text h2 {
+      font-size: 28px;
+      letter-spacing: 4px;
+      margin-bottom: 15px;
     }
 
-    .caption {
-      margin-top: 10px;
-      color: #888;
+    .file-text p {
+      color: #aaa;
+      line-height: 1.7;
+    }
+
+    .tag {
+      color: #666;
       font-size: 13px;
       letter-spacing: 2px;
     }
 
     footer {
       text-align: center;
-      padding: 40px;
+      padding: 50px;
       color: #555;
-      font-size: 12px;
       letter-spacing: 3px;
+      background: black;
     }
 
-    @media(max-width:700px){
-
-      h1{
-        font-size:35px;
+    @media(max-width:800px) {
+      h1 {
+        font-size: 35px;
       }
 
-      .gallery{
-        padding:25px;
+      .file,
+      .file:nth-child(even) {
+        flex-direction: column;
       }
 
+      .file img,
+      .file-text {
+        width: 100%;
+      }
     }
-
   </style>
 </head>
 
@@ -167,42 +182,45 @@
   <div class="noise"></div>
 
   <section class="hero">
+    <div class="floating-text one">where did this come from?</div>
+    <div class="floating-text two">file damaged</div>
+    <div class="floating-text three">do not look too long</div>
 
-    <h1>YEWKIE'S</h1>
-
-    <div class="subtitle">
-      virtual gallery archive
+    <div class="hero-box">
+      <h1>YEWKIE'S</h1>
+      <div class="subtitle">virtual gallery archive</div>
+      <a href="#archive" class="enter">ENTER THE ARCHIVE</a>
     </div>
-
-    <a href="#gallery" class="enter">
-      ENTER
-    </a>
-
   </section>
 
-  <section id="gallery" class="gallery">
+  <section id="archive" class="archive">
 
-    <div class="art">
+    <div class="section-title">LOST_FILES</div>
+
+    <div class="file">
       <img src="art1.jpg">
-
-      <div class="caption">
-        lost_file_01
+      <div class="file-text">
+        <div class="tag">file_001</div>
+        <h2>MEMORY ONE</h2>
+        <p>A strange piece recovered from the archive. Something about it feels familiar, but not fully real.</p>
       </div>
     </div>
 
-    <div class="art">
+    <div class="file">
       <img src="art2.jpg">
-
-      <div class="caption">
-        memory_02
+      <div class="file-text">
+        <div class="tag">file_002</div>
+        <h2>SURFACE</h2>
+        <p>This artwork belongs to a place between dreams and static, where everything looks normal until it does not.</p>
       </div>
     </div>
 
-    <div class="art">
+    <div class="file">
       <img src="art3.jpg">
-
-      <div class="caption">
-        surface_03
+      <div class="file-text">
+        <div class="tag">file_003</div>
+        <h2>FOUND IMAGE</h2>
+        <p>An image left behind with no explanation. It waits like a memory someone forgot to delete.</p>
       </div>
     </div>
 
