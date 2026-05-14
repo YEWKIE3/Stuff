@@ -13,7 +13,7 @@
       overflow-x:hidden;
     }
 
-    /* STRONG VHS SCANLINES */
+    /* VHS SCANLINES */
 
     .scanlines{
       position:fixed;
@@ -169,6 +169,8 @@
 
       transition:0.4s;
 
+      cursor:pointer;
+
       filter:
       grayscale(25%)
       contrast(120%);
@@ -266,6 +268,52 @@
       left:12%;
     }
 
+    /* POPUP */
+
+    .popup{
+
+      position:fixed;
+      inset:0;
+
+      background:rgba(0,0,0,0.88);
+
+      display:none;
+
+      justify-content:center;
+      align-items:center;
+
+      z-index:20000;
+    }
+
+    .popup-box{
+
+      border:
+      1px solid rgba(255,255,255,0.2);
+
+      background:black;
+
+      padding:40px;
+
+      max-width:550px;
+
+      text-align:center;
+    }
+
+    .popup-box h2{
+      letter-spacing:4px;
+    }
+
+    .popup-box p{
+      color:#aaa;
+      line-height:1.8;
+    }
+
+    .popup-box span{
+      color:#555;
+      font-size:12px;
+      letter-spacing:2px;
+    }
+
     footer{
 
       text-align:center;
@@ -342,7 +390,13 @@
 
     <div class="file">
 
-      <img src="SidWilsonOBS.PNG">
+      <img
+      src="SidWilsonOBS.PNG"
+
+      onclick="openPopup(
+      'Sid Wilson OBS',
+      'A recent drawing inspired by Sid Wilson and a distorted mental atmosphere.'
+      )">
 
       <div class="text">
 
@@ -362,7 +416,13 @@
 
     <div class="file">
 
-      <img src="art2.jpg">
+      <img
+      src="art2.jpg"
+
+      onclick="openPopup(
+      'Past Work',
+      'Older artwork preserved from previous periods and experiments.'
+      )">
 
       <div class="text">
 
@@ -382,7 +442,13 @@
 
     <div class="file">
 
-      <img src="art3.jpg">
+      <img
+      src="art3.jpg"
+
+      onclick="openPopup(
+      'Forgotten Ones',
+      'Drawings rediscovered from unfinished folders and older archives.'
+      )">
 
       <div class="text">
 
@@ -402,9 +468,45 @@
 
   </section>
 
+  <!-- POPUP -->
+
+  <div id="popup" class="popup" onclick="closePopup()">
+
+    <div class="popup-box">
+
+      <h2 id="popup-title"></h2>
+
+      <p id="popup-desc"></p>
+
+      <span>
+        click anywhere to close
+      </span>
+
+    </div>
+
+  </div>
+
   <footer>
     YEWKIE'S Virtual Gallery
   </footer>
+
+  <script>
+
+    function openPopup(title, desc){
+
+      document.getElementById("popup-title").innerText = title;
+
+      document.getElementById("popup-desc").innerText = desc;
+
+      document.getElementById("popup").style.display = "flex";
+    }
+
+    function closePopup(){
+
+      document.getElementById("popup").style.display = "none";
+    }
+
+  </script>
 
 </body>
 </html>
