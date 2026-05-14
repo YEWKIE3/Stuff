@@ -7,47 +7,10 @@
 
     body{
       margin:0;
-      background:#030303;
+      background:black;
       color:white;
       font-family:monospace;
       overflow-x:hidden;
-    }
-
-    /* STATIC NOISE */
-
-    .noise{
-      position:fixed;
-      inset:0;
-
-      background:
-      repeating-radial-gradient(
-      circle,
-      rgba(255,255,255,0.12) 1px,
-      transparent 2px);
-
-      opacity:0.12;
-
-      pointer-events:none;
-
-      animation:static 0.15s infinite;
-
-      z-index:999;
-    }
-
-    @keyframes static{
-
-      0%{
-        transform:translate(0,0);
-      }
-
-      50%{
-        transform:translate(-10px,6px);
-      }
-
-      100%{
-        transform:translate(6px,-10px);
-      }
-
     }
 
     /* VHS SCANLINES */
@@ -59,22 +22,19 @@
       background:
       repeating-linear-gradient(
       to bottom,
-
       rgba(255,255,255,0.08) 0px,
       rgba(255,255,255,0.08) 2px,
-
       transparent 3px,
-      transparent 6px);
-
-      opacity:0.45;
+      transparent 6px
+      );
 
       pointer-events:none;
 
-      mix-blend-mode:soft-light;
+      z-index:999;
 
-      animation:scanMove 6s linear infinite;
+      opacity:0.6;
 
-      z-index:998;
+      animation:scanMove 8s linear infinite;
     }
 
     @keyframes scanMove{
@@ -84,46 +44,43 @@
       }
 
       100%{
-        transform:translateY(20px);
+        transform:translateY(25px);
       }
 
     }
 
     /* MOVING SHADOWS */
 
-    .shadow-flicker{
+    .shadow{
       position:fixed;
       inset:0;
 
       background:
-
-      radial-gradient(circle at 30% 20%,
-      rgba(255,255,255,0.08),
+      radial-gradient(circle at 20% 30%,
+      rgba(255,255,255,0.05),
       transparent 35%),
 
-      radial-gradient(circle at 70% 70%,
-      rgba(255,255,255,0.06),
+      radial-gradient(circle at 80% 70%,
+      rgba(255,255,255,0.04),
       transparent 40%);
 
       pointer-events:none;
 
-      animation:flickerShadow 5s infinite alternate;
+      animation:shadowMove 7s infinite alternate;
 
-      z-index:2;
+      z-index:1;
     }
 
-    @keyframes flickerShadow{
+    @keyframes shadowMove{
 
       0%{
-        opacity:0.3;
-      }
-
-      50%{
-        opacity:0.7;
+        transform:translateX(0px);
+        opacity:0.4;
       }
 
       100%{
-        opacity:0.4;
+        transform:translateX(20px);
+        opacity:0.7;
       }
 
     }
@@ -131,7 +88,7 @@
     /* HEADER */
 
     .top{
-      padding:80px 10%;
+      padding:90px 10%;
       position:relative;
       z-index:5;
     }
@@ -139,12 +96,11 @@
     .title{
       font-size:42px;
       letter-spacing:10px;
-      margin-bottom:15px;
 
-      animation:titleFlicker 2s infinite;
+      animation:flicker 2s infinite;
     }
 
-    @keyframes titleFlicker{
+    @keyframes flicker{
 
       0%,100%{
         opacity:1;
@@ -155,7 +111,7 @@
       }
 
       50%{
-        opacity:0.1;
+        opacity:0.15;
       }
 
       52%{
@@ -165,7 +121,8 @@
     }
 
     .sub{
-      color:#888;
+      margin-top:15px;
+      color:#777;
       letter-spacing:3px;
     }
 
@@ -181,14 +138,14 @@
 
       display:flex;
 
-      gap:40px;
-
       align-items:center;
+
+      gap:40px;
 
       margin-bottom:120px;
 
       border-top:
-      1px solid rgba(255,255,255,0.12);
+      1px solid rgba(255,255,255,0.1);
 
       padding-top:40px;
     }
@@ -208,11 +165,11 @@
       border:
       1px solid rgba(255,255,255,0.15);
 
-      filter:
-      grayscale(30%)
-      contrast(120%);
-
       transition:0.4s;
+
+      filter:
+      grayscale(25%)
+      contrast(120%);
     }
 
     .file img:hover{
@@ -222,10 +179,8 @@
       rotate(-1deg);
 
       filter:
-      grayscale(0%)
       contrast(170%)
       blur(1px);
-
     }
 
     .text{
@@ -251,6 +206,7 @@
     /* RETURN BUTTON */
 
     .back{
+
       position:fixed;
 
       top:20px;
@@ -265,9 +221,9 @@
 
       padding:10px 20px;
 
-      font-size:13px;
-
       letter-spacing:2px;
+
+      font-size:13px;
 
       transition:0.3s;
 
@@ -284,13 +240,13 @@
     .floating{
       position:absolute;
 
-      color:rgba(255,255,255,0.35);
-
-      letter-spacing:3px;
+      color:rgba(255,255,255,0.25);
 
       font-size:14px;
 
-      z-index:6;
+      letter-spacing:3px;
+
+      z-index:2;
     }
 
     .f1{
@@ -299,13 +255,13 @@
     }
 
     .f2{
-      top:900px;
-      right:8%;
+      top:1000px;
+      right:7%;
     }
 
     .f3{
-      top:1500px;
-      left:15%;
+      top:1600px;
+      left:12%;
     }
 
     footer{
@@ -329,9 +285,7 @@
 
       .file,
       .file:nth-child(even){
-
         flex-direction:column;
-
       }
 
       .file img,
@@ -340,7 +294,7 @@
       }
 
       .title{
-        font-size:28px;
+        font-size:30px;
       }
 
     }
@@ -350,11 +304,9 @@
 
 <body>
 
-  <div class="noise"></div>
-
   <div class="scanlines"></div>
 
-  <div class="shadow-flicker"></div>
+  <div class="shadow"></div>
 
   <div class="floating f1">
     corrupted memory detected
