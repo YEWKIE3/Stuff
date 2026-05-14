@@ -13,38 +13,39 @@
       overflow-x:hidden;
     }
 
-    /* VHS SCANLINES */
+    /* STRONG VHS SCANLINES */
 
     .scanlines{
       position:fixed;
       inset:0;
 
-      background:
-      repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.08) 0px,
-      rgba(255,255,255,0.08) 2px,
-      transparent 3px,
-      transparent 6px
-      );
-
       pointer-events:none;
 
-      z-index:999;
+      z-index:9999;
 
-      opacity:0.6;
+      background:
+      linear-gradient(
+      to bottom,
 
-      animation:scanMove 8s linear infinite;
+      rgba(255,255,255,0.18) 50%,
+      rgba(0,0,0,0.25) 50%
+      );
+
+      background-size:100% 6px;
+
+      opacity:0.35;
+
+      animation:scanMove 0.4s linear infinite;
     }
 
     @keyframes scanMove{
 
-      0%{
-        transform:translateY(0);
+      from{
+        background-position:0 0;
       }
 
-      100%{
-        transform:translateY(25px);
+      to{
+        background-position:0 6px;
       }
 
     }
@@ -56,6 +57,7 @@
       inset:0;
 
       background:
+
       radial-gradient(circle at 20% 30%,
       rgba(255,255,255,0.05),
       transparent 35%),
@@ -227,7 +229,7 @@
 
       transition:0.3s;
 
-      z-index:1000;
+      z-index:10000;
     }
 
     .back:hover{
@@ -373,8 +375,7 @@
         <h2>SURFACE</h2>
 
         <p>
-          Something hidden underneath static
-          and fading memories.
+          Something hidden underneath fading memories.
         </p>
 
       </div>
