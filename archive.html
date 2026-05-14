@@ -156,9 +156,40 @@
       flex-direction:row-reverse;
     }
 
-    .file img{
+    /* CAROUSEL */
 
+    .carousel{
+      display:flex;
+      align-items:center;
+      gap:15px;
       width:45%;
+    }
+
+    .carousel button{
+
+      background:black;
+
+      color:white;
+
+      border:
+      1px solid rgba(255,255,255,0.2);
+
+      width:40px;
+      height:40px;
+
+      cursor:pointer;
+
+      transition:0.3s;
+    }
+
+    .carousel button:hover{
+      background:white;
+      color:black;
+    }
+
+    .carousel img{
+
+      width:100%;
 
       max-height:500px;
 
@@ -172,7 +203,7 @@
       cursor:pointer;
     }
 
-    .file img:hover{
+    .carousel img:hover{
 
       transform:scale(1.03);
 
@@ -330,7 +361,7 @@
         flex-direction:column;
       }
 
-      .file img,
+      .carousel,
       .text{
         width:100%;
       }
@@ -380,15 +411,26 @@
 
   <section class="gallery">
 
+    <!-- RECENTS -->
+
     <div class="file">
 
-      <img
-      src="SidWilsonOBS.PNG"
+      <div class="carousel">
 
-      onclick="openPopup(
-      'Sid Wilson OBS',
-      'A recent drawing inspired by Sid Wilson and a distorted mental atmosphere.'
-      )">
+        <button onclick="prevImage('recent')">&#10094;</button>
+
+        <img
+        id="recent-img"
+        src="SidWilsonOBS.PNG"
+
+        onclick="openPopup(
+        'Sid Wilson OBS',
+        'A recent drawing inspired by Sid Wilson and a distorted mental atmosphere.'
+        )">
+
+        <button onclick="nextImage('recent')">&#10095;</button>
+
+      </div>
 
       <div class="text">
 
@@ -406,15 +448,26 @@
 
     </div>
 
+    <!-- PAST WORK -->
+
     <div class="file">
 
-      <img
-      src="art2.jpg"
+      <div class="carousel">
 
-      onclick="openPopup(
-      'Past Work',
-      'Older artwork preserved from previous periods and experiments.'
-      )">
+        <button onclick="prevImage('past')">&#10094;</button>
+
+        <img
+        id="past-img"
+        src="GoofyGoat2.PNG"
+
+        onclick="openPopup(
+        'Goofy Goat',
+        currentPastDescription
+        )">
+
+        <button onclick="nextImage('past')">&#10095;</button>
+
+      </div>
 
       <div class="text">
 
@@ -432,15 +485,26 @@
 
     </div>
 
+    <!-- FORGOTTEN ONES -->
+
     <div class="file">
 
-      <img
-      src="art3.jpg"
+      <div class="carousel">
 
-      onclick="openPopup(
-      'Forgotten Ones',
-      'Drawings rediscovered from unfinished folders and older archives.'
-      )">
+        <button onclick="prevImage('forgotten')">&#10094;</button>
+
+        <img
+        id="forgotten-img"
+        src="Eye.PNG"
+
+        onclick="openPopup(
+        'The Seventh Seal',
+        'This was a Mr Burgart project I had to do for The Seventh Seal.'
+        )">
+
+        <button onclick="nextImage('forgotten')">&#10095;</button>
+
+      </div>
 
       <div class="text">
 
@@ -496,6 +560,66 @@
     function closePopup(){
 
       document.getElementById("popup").style.display = "none";
+    }
+
+    /* IMAGE DATA */
+
+    const pastImages = [
+
+      {
+        src:"GoofyGoat2.PNG",
+
+        desc:"The first drawing I made of a goat."
+      },
+
+      {
+        src:"GoofyGoat.JPG",
+
+        desc:"This is the same goat I made art for, but this time I made him do a goofy pose."
+      }
+
+    ];
+
+    let pastIndex = 0;
+
+    let currentPastDescription = pastImages[0].desc;
+
+    function nextImage(type){
+
+      if(type === "past"){
+
+        pastIndex++;
+
+        if(pastIndex >= pastImages.length){
+          pastIndex = 0;
+        }
+
+        document.getElementById("past-img").src =
+        pastImages[pastIndex].src;
+
+        currentPastDescription =
+        pastImages[pastIndex].desc;
+      }
+
+    }
+
+    function prevImage(type){
+
+      if(type === "past"){
+
+        pastIndex--;
+
+        if(pastIndex < 0){
+          pastIndex = pastImages.length - 1;
+        }
+
+        document.getElementById("past-img").src =
+        pastImages[pastIndex].src;
+
+        currentPastDescription =
+        pastImages[pastIndex].desc;
+      }
+
     }
 
   </script>
