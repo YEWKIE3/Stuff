@@ -326,13 +326,13 @@
 
   <section class="top">
 
- <div class="title">
-  YEWKIE_ARCHIVE
-</div>
+    <div class="title">
+      YEWKIE_ARCHIVE
+    </div>
 
-<div class="sub">
-  art fragments
-</div>
+    <div class="sub">
+      art fragments
+    </div>
 
   </section>
 
@@ -351,8 +351,8 @@
         src="SidWilsonOBS.PNG"
 
         onclick="openPopup(
-        'Sid Wilson OBS',
-        'A recent drawing inspired by Sid Wilson, Sid Wilson talked about taking a lot of LSD and other drugs when he was younger, and he connected that to Organic Brain Syndrome. He described having visual trails, hallucinations, and weird sensory experiences that stayed with him afterward. So I wanted him to be in the center of the picture and what I did with the background was to create a distorted mental atmosphere, just so it could fit with his side effects of LSD.'
+        currentRecentTitle,
+        currentRecentDescription
         )">
 
         <button onclick="nextImage('recent')">&#10095;</button>
@@ -489,7 +489,35 @@
       document.getElementById("popup").style.display = "none";
     }
 
-    /* IMAGE DATA */
+    /* RECENT IMAGES */
+
+    const recentImages = [
+
+      {
+        src:"SidWilsonOBS.PNG",
+
+        title:"Sid Wilson OBS",
+
+        desc:"A recent drawing inspired by Sid Wilson, Sid Wilson talked about taking a lot of LSD and other drugs when he was younger, and he connected that to Organic Brain Syndrome. He described having visual trails, hallucinations, and weird sensory experiences that stayed with him afterward. So I wanted him to be in the center of the picture and what I did with the background was to create a distorted mental atmosphere, just so it could fit with his side effects of LSD."
+      },
+
+      {
+        src:"CraigJones.PNG",
+
+        title:"Craig Jones",
+
+        desc:"A recent drawing added into the archive."
+      }
+
+    ];
+
+    let recentIndex = 0;
+
+    let currentRecentTitle = recentImages[0].title;
+
+    let currentRecentDescription = recentImages[0].desc;
+
+    /* PAST IMAGES */
 
     const pastImages = [
 
@@ -513,6 +541,24 @@
 
     function nextImage(type){
 
+      if(type === "recent"){
+
+        recentIndex++;
+
+        if(recentIndex >= recentImages.length){
+          recentIndex = 0;
+        }
+
+        document.getElementById("recent-img").src =
+        recentImages[recentIndex].src;
+
+        currentRecentTitle =
+        recentImages[recentIndex].title;
+
+        currentRecentDescription =
+        recentImages[recentIndex].desc;
+      }
+
       if(type === "past"){
 
         pastIndex++;
@@ -531,6 +577,24 @@
     }
 
     function prevImage(type){
+
+      if(type === "recent"){
+
+        recentIndex--;
+
+        if(recentIndex < 0){
+          recentIndex = recentImages.length - 1;
+        }
+
+        document.getElementById("recent-img").src =
+        recentImages[recentIndex].src;
+
+        currentRecentTitle =
+        recentImages[recentIndex].title;
+
+        currentRecentDescription =
+        recentImages[recentIndex].desc;
+      }
 
       if(type === "past"){
 
