@@ -50,43 +50,6 @@
 
     }
 
-    /* MOVING SHADOWS */
-
-    .shadow{
-      position:fixed;
-      inset:0;
-
-      background:
-
-      radial-gradient(circle at 20% 30%,
-      rgba(255,255,255,0.05),
-      transparent 35%),
-
-      radial-gradient(circle at 80% 70%,
-      rgba(255,255,255,0.04),
-      transparent 40%);
-
-      pointer-events:none;
-
-      animation:shadowMove 7s infinite alternate;
-
-      z-index:1;
-    }
-
-    @keyframes shadowMove{
-
-      0%{
-        transform:translateX(0px);
-        opacity:0.4;
-      }
-
-      100%{
-        transform:translateX(20px);
-        opacity:0.7;
-      }
-
-    }
-
     /* HEADER */
 
     .top{
@@ -265,35 +228,6 @@
       color:black;
     }
 
-    /* FLOATING TEXT */
-
-    .floating{
-      position:absolute;
-
-      color:rgba(255,255,255,0.25);
-
-      font-size:14px;
-
-      letter-spacing:3px;
-
-      z-index:2;
-    }
-
-    .f1{
-      top:250px;
-      left:5%;
-    }
-
-    .f2{
-      top:1000px;
-      right:7%;
-    }
-
-    .f3{
-      top:1600px;
-      left:12%;
-    }
-
     /* POPUP */
 
     .popup{
@@ -385,20 +319,6 @@
 <body>
 
   <div class="scanlines"></div>
-
-  <div class="shadow"></div>
-
-  <div class="floating f1">
-    corrupted memory detected
-  </div>
-
-  <div class="floating f2">
-    archive unstable
-  </div>
-
-  <div class="floating f3">
-    recovered fragments
-  </div>
 
   <a href="index.html" class="back">
     RETURN
